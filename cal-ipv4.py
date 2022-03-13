@@ -10,8 +10,6 @@
 # "Classe B 172.16.0.0 - 172.31.255.255"
 # "Classe C 192.168.0.0 - 192.168.255.255"
 
-from email.mime import base
-
 
 ipv4 = input(r'digite um ip valido "com pontos": ')
 # my_mask = input(r'digite uma maskara *"com pontos"*')
@@ -20,13 +18,12 @@ octet_ipv4 = ipv4.split('.')
 tipo_classe = ''
 
 #     =>  8    7   6   5  4  3  2  1
-octet = [128, 64, 32, 16, 8, 4, 2, 1]
+octet_dec = [128, 64, 32, 16, 8, 4, 2, 1]
 
 octet1 = int(octet_ipv4[0])
 octet2 = int(octet_ipv4[1])
 octet3 = int(octet_ipv4[2])
 octet4 = int(octet_ipv4[3])
-# --------------------------------------------------------------
 
 # ---------------------------------------------------------------------------------------
 if octet1 > 0 and octet1 < 128:
@@ -35,15 +32,15 @@ if octet1 > 0 and octet1 < 128:
 
     else:
         tipo_classe = 'A'
-        print('Classe A')
+        print('Classe A / 10.0.0.0 - 10.255.255.255')
 # ---------------------------------------------------------------------------------------
 if octet1 > 127 and octet1 < 192:
     tipo_classe = 'B'
-    print('Classe B')
+    print('Classe B / 172.16.0.0 - 172.31.255.255')
 # ---------------------------------------------------------------------------------------
 if octet1 > 191 and octet1 < 224:
     tipo_classe = 'C'
-    print('Classe C')
+    print('Classe C / 192.168.0.0 - 192.168.255.255')
 # ---------------------------------------------------------------------------------------
 if octet1 > 223 and octet1 < 240:
     tipo_classe = 'D'
@@ -53,42 +50,51 @@ if octet1 > 239 and octet1 < 256:
     tipo_classe = 'E'
     print('Classe E')
 
+
+octets = [octet1, octet2, octet3, octet4]
+soma_bit = 0
+list_octs = []
+for oct in octets:
+    list_bits = []
+    for index in range(8):
+        if octet_dec[index] <= oct:
+            res = oct % octet_dec[index]
+            list_bits.append(1)
+            soma_bit += octet_dec[index]
+            if res == octet_dec[index]:
+                break
+            oct = res
+        else:
+            list_bits.append(0)
+
+    list_octs.append(list_bits)
+
+print('----------------------------------------------------------------------------------------------------------')
+octets_decs = [octet_dec, octet_dec, octet_dec, octet_dec]
+print(f'octets:{octets_decs}')
+print('----------------------------------------------------------------------------------------------------------')
+print(f'bits:{list_octs}')
+print('----------------------------------------------------------------------------------------------------------')
+
 for v in range(4):
     for index in range(8):
         if index == 7:
-            print(f'/{octet[index]}', end='  ||  ')
+            print(f'/{octet_dec[index]}', end='  ||  ')
 
         else:
-            print(f'/{octet[index]}', end='')
+            print(f'/{octet_dec[index]}', end='')
 
 print('')
 
-classe_oct = octet1
-soma_bit = 0
-bit = []
-for index in range(8):
-    if octet[index] <= classe_oct:
-        res = classe_oct % octet[index]
-        bit.append(1)
-        soma_bit += octet[index]
-        if res == octet[index]:
-            break
-        classe_oct = res
-    else:
-        bit.append(0)
 
-
-# print(bit)
-# print(soma_bit)
-
-
-for index in range(8):
-    if index == 7:
-        print(f'/{bit[index]}', end='   ||  ')
-    elif octet[index] < 16:
-        print(f'/{bit[index]}', end='')
-    else:
-        print(f'/ {bit[index]}', end='')
+for oct_ in list_octs:
+    for bit in range(8):
+        if bit == 7:
+            print(f'/{oct_[bit]}', end='   ||  ')
+        elif octet_dec[bit] < 16:
+            print(f'/{oct_[bit]}', end='')
+        else:
+            print(f'/ {oct_[bit]}', end='')
 
 
 # --------------------------------------------------
