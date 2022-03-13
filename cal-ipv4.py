@@ -27,21 +27,7 @@ octet2 = int(octet_ipv4[1])
 octet3 = int(octet_ipv4[2])
 octet4 = int(octet_ipv4[3])
 # --------------------------------------------------------------
-classe_oct = octet1
-soma_res = 0
-bit = []
-for index in range(7):
-    if octet[index] <= classe_oct:
-        res = classe_oct % octet[index]
-        bit.append(octet[index])
-        if res == octet[index]:
-            break
-        classe_oct = res
-print(bit)
-soma = 0
-for v in bit:
-    soma += v
-print(soma)
+
 # ---------------------------------------------------------------------------------------
 if octet1 > 0 and octet1 < 128:
     if octet1 == 127:
@@ -77,14 +63,32 @@ for v in range(4):
 
 print('')
 
-for v in range(4):
-    for index in range(8):
-        if index == 7:
-            print(f'/{0}', end='   ||  ')
-        elif octet[index] < 16:
-            print(f'/{0}', end='')
-        else:
-            print(f'/ {0}', end='')
+classe_oct = octet1
+soma_bit = 0
+bit = []
+for index in range(8):
+    if octet[index] <= classe_oct:
+        res = classe_oct % octet[index]
+        bit.append(1)
+        soma_bit += octet[index]
+        if res == octet[index]:
+            break
+        classe_oct = res
+    else:
+        bit.append(0)
+
+
+# print(bit)
+# print(soma_bit)
+
+
+for index in range(8):
+    if index == 7:
+        print(f'/{bit[index]}', end='   ||  ')
+    elif octet[index] < 16:
+        print(f'/{bit[index]}', end='')
+    else:
+        print(f'/ {bit[index]}', end='')
 
 
 # --------------------------------------------------
