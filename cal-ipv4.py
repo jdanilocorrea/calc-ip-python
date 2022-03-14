@@ -103,6 +103,8 @@ for oct_ in list_octs:
 print('')
 
 print('----------------------------------------------------------------------------------------------------------')
+print('|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-||')
+print('----------------------------------------------------------------------------------------------------------')
 
 bits_rede = 0
 bits_maq = 0
@@ -126,9 +128,30 @@ for oct_mk in octets_mask:
 print(f'mascara: {octets_mask}')
 print(f'bits de rede: {bits_rede}')
 print(f'bits de máquina: {bits_maq}')
+print('----------------------------------------------------------------------------------------------------------')
+
+print(f'octetos de bits:\n{list_octs_bits_mask}')
 print(
     f'mask:{octets_mask[0]: ^20}||{octets_mask[1]: ^24}||{octets_mask[2]: ^24}||{octets_mask[3]: ^24}')
-print(f'octetos de bits: {list_octs_bits_mask}')
+print('----------------------------------------------------------------------------------------------------------')
+for v in range(4):
+    for index in range(8):
+        if index == 7:
+            print(f'/{octet_dec[index]}', end='  ||  ')
 
+        else:
+            print(f'/{octet_dec[index]}', end='')
+
+print('')
+
+
+for moct_ in list_octs_bits_mask:
+    for bit in range(8):
+        if bit == 7:
+            print(f'/{moct_[bit]}', end='   ||  ')
+        elif octet_dec[bit] < 16:
+            print(f'/{moct_[bit]}', end='')
+        else:
+            print(f'/ {moct_[bit]}', end='')
 # --------------------------------------------------
 # append, insert, pop, del, clear, extend, +
