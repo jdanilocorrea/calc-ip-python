@@ -12,9 +12,11 @@
 
 
 ipv4 = input(r'digite um ip valido "com pontos": ')
+mask = input(r'digite uma mascara valida "com pontos": ')
 # my_mask = input(r'digite uma maskara *"com pontos"*')
 
 octet_ipv4 = ipv4.split('.')
+octets_mask = mask.split('.')
 tipo_classe = ''
 
 #     =>  8    7   6   5  4  3  2  1
@@ -98,6 +100,35 @@ for oct_ in list_octs:
         else:
             print(f'/ {oct_[bit]}', end='')
 
+print('')
+
+print('----------------------------------------------------------------------------------------------------------')
+
+bits_rede = 0
+bits_maq = 0
+list_octs_bits_mask = []
+
+for oct_mk in octets_mask:
+    bits_mask = []
+    bit_dec = 256 - int(oct_mk)
+    for index in range(len(octet_dec)):
+        if int(oct_mk) == 255:
+            bits_rede += 1
+            bits_mask.append(1)
+        elif bit_dec <= octet_dec[index]:
+            bits_rede += 1
+            bits_mask.append(1)
+        else:
+            bits_maq += 1
+            bits_mask.append(0)
+    list_octs_bits_mask.append(bits_mask)
+
+print(f'mascara: {octets_mask}')
+print(f'bits de rede: {bits_rede}')
+print(f'bits de máquina: {bits_maq}')
+print(
+    f'mask:{octets_mask[0]: ^20}||{octets_mask[1]: ^24}||{octets_mask[2]: ^24}||{octets_mask[3]: ^24}')
+print(f'octetos de bits: {list_octs_bits_mask}')
 
 # --------------------------------------------------
 # append, insert, pop, del, clear, extend, +
