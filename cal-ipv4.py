@@ -13,7 +13,7 @@
 
 ipv4 = input(r'digite um ip valido "com pontos": ')
 mask = input(r'digite uma mascara valida "com pontos": ')
-# my_mask = input(r'digite uma maskara *"com pontos"*')
+
 
 octet_ipv4 = ipv4.split('.')
 octets_mask = mask.split('.')
@@ -160,5 +160,13 @@ def calcmask(octets_masK):
 
 calcmask(octets_mask)
 
+# print('----------------------------------------------------------------------------------------------------------')
+# print('|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-||')
+# print('----------------------------------------------------------------------------------------------------------')
+
+
+# def intervalip(ipv4_, mask_):
+#     ipv4_ = int(ipv4_)
+#     mask_ = int(mask_)
 # --------------------------------------------------
 # append, insert, pop, del, clear, extend, +
