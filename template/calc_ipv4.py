@@ -115,10 +115,19 @@ class CalculateIP:
                 num_rede = 2 ** len(bit_rede) 
                 return num_rede               
 
-
-
+    @classmethod
+    def variationIndex(cls,num_host):
+        variation = 256 / num_host
+        if variation > 1 :
+            return int(variation)
+        else:
+            variation = 1 / variation
+            return int(variation)
 
 # testes
+# num_host = 64
+# CalculateIP.variationIndex(num_host)
+
 # cl_rede = 'Class C'
 # mask = [255,255,255,0]
 # conv_bits_mask = CalculateIP.maskConvertBits(mask)

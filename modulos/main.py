@@ -33,6 +33,14 @@ class MainWindow(QtWidgets.QMainWindow,CalculateIP):
 
         #Converte IP em bits
         conv_bits_mask = CalculateIP.maskConvertBits(octets_mask)
+        
+        #Numero de hosts por redes
+        num_host = CalculateIP.totalHostRede(conv_bits_mask, cl_rede)
+        self.ui.label_host_value.setText(str(num_host))
+        
+        #Numero de rede de grupos hosts
+        num_rede = CalculateIP.totalRede(conv_bits_mask, cl_rede)
+        self.ui.label_subrede_value.setText(str(num_rede))
 
         #Total de bits para hosts 
         total_bits_host = CalculateIP.totalBitsHost(conv_bits_mask)
@@ -42,6 +50,14 @@ class MainWindow(QtWidgets.QMainWindow,CalculateIP):
         total_bits_rede = CalculateIP.totalBitsRede(conv_bits_mask)
         self.ui.label_bitsredes_value.setText(str(total_bits_rede))
 
+        #Indice de variação de rede
+        variation_index = CalculateIP.variationIndex(num_host)
+        self.ui.label_variationindex_value.setText(str(variation_index))
+
+        #Ips úteis
+        self.ui.label_userfulip_value.setText(str(num_host - 2))
+        #Redes úteis
+        self.ui.label_userfulsub_value.setText(str(num_rede - 2))
 
     def buttonClear(self):
         self.ui.lineEdit_rede.setText('')
